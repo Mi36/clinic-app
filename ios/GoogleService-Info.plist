@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>535959478385-qrc6bd3008osv72g7vmlfgpvgm4lhdjn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.535959478385-qrc6bd3008osv72g7vmlfgpvgm4lhdjn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDBgdtFt0deAMd6cvXeCaoTcUmG_ZmlBIQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>535959478385</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.clinicApp</string>
+	<key>PROJECT_ID</key>
+	<string>clinic-app-ddc95</string>
+	<key>STORAGE_BUCKET</key>
+	<string>clinic-app-ddc95.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:535959478385:ios:d5fba884e6f457139dfbd0</string>
+	<key>DATABASE_URL</key>
+	<string>https://clinic-app-ddc95.firebaseio.com</string>
+</dict>
+</plist>

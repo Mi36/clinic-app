@@ -56,3 +56,18 @@ export default function HomeScreen({navigation}) {
     </SafeAreaView>
   );
 }
+
+HomeScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: 'Questions',
+
+    headerRight: () => (
+      <Button
+        onPress={() => {
+          navData.navigation.navigate('loginFlow');
+        }}>
+        Logout
+      </Button>
+    ),
+  };
+};

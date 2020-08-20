@@ -3,7 +3,6 @@ import {FlatList, SafeAreaView} from 'react-native';
 import Questions from '../components/Questions';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchQuestionClient} from '../actions/clientActions';
-
 import {Layout, Button} from '@ui-kitten/components';
 
 export default function ClientScreen({navigation}) {
@@ -16,12 +15,6 @@ export default function ClientScreen({navigation}) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Layout style={{flex: 1}}>
-        <Button
-          onPress={() => {
-            navigation.navigate('loginFlow');
-          }}>
-          LogOut
-        </Button>
         <FlatList
           style={{flex: 1}}
           data={data}
@@ -32,3 +25,17 @@ export default function ClientScreen({navigation}) {
     </SafeAreaView>
   );
 }
+ClientScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: 'Submit Your Answer',
+
+    headerRight: () => (
+      <Button
+        onPress={() => {
+          navData.navigation.navigate('loginFlow');
+        }}>
+        Logout
+      </Button>
+    ),
+  };
+};

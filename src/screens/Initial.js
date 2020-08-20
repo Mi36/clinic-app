@@ -4,7 +4,7 @@ import {Layout, Text, Button, Input} from '@ui-kitten/components';
 
 export default function Initial(props) {
   return (
-    <View>
+    <View style={{justifyContent: 'center', flex: 1}}>
       <Button
         style={{marginVertical: 16}}
         onPress={() => {
@@ -22,3 +22,8 @@ export default function Initial(props) {
     </View>
   );
 }
+Initial.navigationOptions = () => {
+  return {
+    header: () => false,
+  };
+};

@@ -1,4 +1,4 @@
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
@@ -8,21 +8,28 @@ import ClientScreen from '../screens/ClientScreen';
 import ClientListScreen from '../screens/ClientListScreen';
 import Initial from '../screens/Initial';
 import clientAnswersScreen from '../screens/clientAnswersScreen';
+import AdminLogin from '../screens/AdminLogin';
+import ClientLogin from '../screens/ClientLogin';
 
-const AppNavigator = createStackNavigator({
-  Initial: Initial,
-  Home: HomeScreen,
-  Item: Item,
-  Client: ClientScreen,
-});
-const clientNavigator = createStackNavigator({
-  ClientList: ClientListScreen,
-  ClientAnswers: clientAnswersScreen,
+const switchNavigator = createSwitchNavigator({
+  loginFlow: createStackNavigator({
+    Initial: Initial,
+    Admin: AdminLogin,
+    ClientLogin: ClientLogin,
+  }),
+  clientFlow: createStackNavigator({
+    Client: ClientScreen,
+  }),
+  adminFlow: createBottomTabNavigator({
+    Qustions: createStackNavigator({
+      Home: HomeScreen,
+      Item: Item,
+    }),
+    Clients: createStackNavigator({
+      ClientList: ClientListScreen,
+      ClientAnswers: clientAnswersScreen,
+    }),
+  }),
 });
 
-const TabNavigator = createBottomTabNavigator({
-  Home: AppNavigator,
-  Clients: clientNavigator,
-});
-
-export default createAppContainer(TabNavigator);
+export default createAppContainer(switchNavigator);

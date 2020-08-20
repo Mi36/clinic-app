@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-import {Button, Input, Layout} from '@ui-kitten/components';
+import {Button, Input} from '@ui-kitten/components';
 import firestore from '@react-native-firebase/firestore';
-import firebase from '@react-native-firebase/app';
 
 export default function Questions(props) {
   const [answer, setAnswer] = useState('');
@@ -21,12 +20,6 @@ export default function Questions(props) {
       answer: answer,
     });
   }
-
-  useEffect(() => {
-    return clientRef.onSnapshot((querySnapshot) => {
-      console.log(querySnapshot);
-    });
-  }, []);
 
   return (
     <View>

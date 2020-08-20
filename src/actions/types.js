@@ -1,0 +1,10 @@
+export const ADD_QUESTION = 'add_question';
+export const EDIT_QUESTION = 'edit_question';
+export const DELETE_QUESTION = 'delete_question';
+export const FETCH_QUESTIONS = 'fetch_questions';
+export const QUESTION_CHANGED = 'question_changed';
+export const QUESTION_FETCH_SUCCES = 'question_fetch_success';
+export const ADD_QUESTION_ERROR = 'add_question_error';
+export const FETCH_CLIENTS = 'FETCH_CLIENTS';
+export const FETCH_QUESTIONS_CLIENT = 'FETCH_QUESTIONS_CLIENT';
+export const FETCH_CLIENT_ANSWERS = 'FETCH_CLIENT_ANSWERS';

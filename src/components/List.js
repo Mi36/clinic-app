@@ -1,13 +1,10 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Text, Button} from '@ui-kitten/components';
-import firestore from '@react-native-firebase/firestore';
-
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteQuestion, updateQuestion} from '../actions/questionAction';
 function List(props) {
-  const ref = firestore().collection('questions');
-  const deleteItem = () => {
-    ref.doc(props.questions.id).delete();
-  };
+  const dispatch = useDispatch();
   return (
     <View style={{flexDirection: 'row'}}>
       <View style={{backgroundColor: 'grey', marginVertical: 12}}>
@@ -15,7 +12,7 @@ function List(props) {
       </View>
       <Button
         onPress={() => {
-          deleteItem();
+          dispatch(deleteQuestion(props.questions.id));
         }}>
         delete
       </Button>
@@ -30,4 +27,4 @@ function List(props) {
     </View>
   );
 }
-export default React.memo(List);
+export default List;

@@ -1,46 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, SafeAreaView} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
 import Questions from '../components/Questions';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchQuestionClient} from '../actions/clientActions';
 
-import {Button, Input, Layout} from '@ui-kitten/components';
-import firestore from '@react-native-firebase/firestore';
+import {Layout} from '@ui-kitten/components';
 
 export default function ClientScreen() {
-  const [loadingClient, setClientLoading] = useState(true);
-  const [questionsClient, setQuestionsClient] = useState([]);
-  const ref = firestore().collection('questions');
+  const data = useSelector((state) => state.clientQuestions.questions);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    return ref.onSnapshot((querySnapshot) => {
-      const dataList = [];
-      querySnapshot.forEach((doc) => {
-        const {title} = doc.data();
-        dataList.push({
-          id: doc.id,
-          title,
-        });
-      });
-      console.log(dataList);
-      console.log('dsds', questionsClient);
-
-      setQuestionsClient(dataList);
-
-      if (loadingClient) {
-        setClientLoading(false);
-      }
-    });
+    dispatch(fetchQuestionClient());
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
       <Layout style={{flex: 1, alignItems: 'center'}}>
-        {loadingClient ? null : (
-          <FlatList
-            style={{flex: 1}}
-            data={questionsClient}
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => <Questions questions={item} />}
-          />
-        )}
+        <FlatList
+          style={{flex: 1}}
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({item}) => <Questions questions={item} />}
+        />
       </Layout>
     </SafeAreaView>
   );

@@ -1,41 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {View, SafeAreaView, FlatList} from 'react-native';
 import {Layout, Text, Button, Input} from '@ui-kitten/components';
-import firestore from '@react-native-firebase/firestore';
 import List from '../components/List';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  questionChange,
+  questionsFetch,
+  addQuestion,
+  fetchClients,
+} from '../actions/questionAction';
 
 export default function HomeScreen({navigation}) {
-  const [question, setQuestion] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [questions, setQuestions] = useState([]);
-
-  const ref = firestore().collection('questions');
-  async function addQuestion() {
-    await ref.add({
-      title: question,
-      complete: false,
-    });
-    setQuestion('');
-  }
+  const question = useSelector((state) => state.questions.question);
+  const lists = useSelector((state) => state.questions.list);
+  const loading = useSelector((state) => state.questions.loading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    return ref.onSnapshot((querySnapshot) => {
-      const list = [];
-      querySnapshot.forEach((doc) => {
-        const {title, complete} = doc.data();
-        list.push({
-          id: doc.id,
-          title,
-          complete,
-        });
-      });
-
-      setQuestions(list);
-
-      if (loading) {
-        setLoading(false);
-      }
-    });
+    dispatch(questionsFetch());
+    dispatch(fetchClients());
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -43,19 +26,20 @@ export default function HomeScreen({navigation}) {
         <Input
           label={'New Question'}
           value={question}
-          onChangeText={setQuestion}
+          onChangeText={(text) => dispatch(questionChange(text))}
         />
-        <Button onPress={() => addQuestion()}>Add Qustion</Button>
-        <Button onPress={() => navigation.navigate('Client')}>
-          ClientScreen
+        <Button onPress={() => dispatch(addQuestion({question}))}>
+          Add Qustion
         </Button>
-        <Button onPress={() => navigation.navigate('ClientList')}>
-          ClientListScreen
-        </Button>
-        {loading ? null : (
+
+        {loading ? (
+          <View>
+            <Text>loading.....</Text>
+          </View>
+        ) : (
           <FlatList
             style={{flex: 1}}
-            data={questions}
+            data={lists}
             keyExtractor={(item) => item.id}
             renderItem={({item}) => (
               <List questions={item} navigation={navigation} />

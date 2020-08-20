@@ -1,27 +1,22 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateQuestion} from '../actions/questionAction';
 
 import {Button, Input} from '@ui-kitten/components';
-import firestore from '@react-native-firebase/firestore';
 
 export default function Item(props) {
-  const ref = firestore().collection('questions');
-
+  const dispatch = useDispatch();
   const question = props.navigation.getParam('item', null);
   const [value, setValue] = useState(question.title);
-  const updateItem = () => {
-    ref.doc(question.id).update({
-      title: value,
-    });
-  };
 
   return (
     <View>
       <Input label={'Edit Question'} value={value} onChangeText={setValue} />
       <Button
         onPress={() => {
-          updateItem();
-          props.navigation.goBack();
+          dispatch(updateQuestion(question.id, value));
+          props.navigation.goBack(); // it can be done on reducer
         }}>
         Save
       </Button>

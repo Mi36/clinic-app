@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-export default function ClientAnswerScreen() {
+export default function AdminLogin() {
   return (
     <View>
-      <Text>ClientAnswerScreen</Text>
+      <Text></Text>
     </View>
   );
 }

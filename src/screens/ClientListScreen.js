@@ -1,27 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {View, SafeAreaView, FlatList} from 'react-native';
-import {Layout, Text, Button, Input} from '@ui-kitten/components';
-import firestore from '@react-native-firebase/firestore';
+import React, {useEffect} from 'react';
+import {FlatList} from 'react-native';
+import {Text} from '@ui-kitten/components';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchClients} from '../actions/questionAction';
+import ClientListItem from '../screens/ClientListItem';
 
-export default function ClientListScreen() {
-  const [list, setList] = useState('');
-  const ref = firestore().collection('clients');
-
+export default function ClientListScreen(props) {
+  const data = useSelector((state) => state.questions);
+  const dispatch = useDispatch();
   useEffect(() => {
-    return ref.onSnapshot((querySnapshot) => {
-      const list = [];
-      querySnapshot.forEach((doc) => {
-        list.push({
-          id: doc.id,
-        });
-      });
-      setList(list);
-    });
+    dispatch(fetchClients());
   }, []);
+
   return (
-    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <Text>{list[0].id}</Text>
-      <Text>{list[1].id}</Text>
-    </View>
+    <FlatList
+      style={{flex: 1}}
+      data={data.clients}
+      keyExtractor={(item) => item.id}
+      renderItem={({item}) => (
+        <ClientListItem data={item} navigation={props.navigation} />
+      )}
+    />
   );
 }

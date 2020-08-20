@@ -8,14 +8,14 @@ export default function Initial(props) {
       <Button
         style={{marginVertical: 16}}
         onPress={() => {
-          props.navigation.navigate('Home');
+          props.navigation.navigate('Admin');
         }}>
         Admin
       </Button>
       <Button
         style={{marginVertical: 16}}
         onPress={() => {
-          props.navigation.navigate('Client');
+          props.navigation.navigate('ClientLogin');
         }}>
         clientSection
       </Button>

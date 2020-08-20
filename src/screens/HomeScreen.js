@@ -31,6 +31,12 @@ export default function HomeScreen({navigation}) {
         <Button onPress={() => dispatch(addQuestion({question}))}>
           Add Qustion
         </Button>
+        <Button
+          onPress={() => {
+            navigation.navigate('loginFlow');
+          }}>
+          LogOut
+        </Button>
 
         {loading ? (
           <View>

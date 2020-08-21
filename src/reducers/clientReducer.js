@@ -2,6 +2,7 @@ import {
   FETCH_QUESTIONS_CLIENT,
   ADD_ANSWER,
   TOGGLE_SUCCESS,
+  HANDLE_EMPTY_QUESTION,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -13,6 +14,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case HANDLE_EMPTY_QUESTION:
+      return {
+        ...state,
+        questions: [],
+      };
     case 'FALSE_SUCCESS': {
       return {
         ...state,

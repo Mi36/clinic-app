@@ -1,4 +1,9 @@
-import {FETCH_QUESTIONS_CLIENT, ADD_ANSWER, TOGGLE_SUCCESS} from './types';
+import {
+  FETCH_QUESTIONS_CLIENT,
+  ADD_ANSWER,
+  TOGGLE_SUCCESS,
+  HANDLE_EMPTY_QUESTION,
+} from './types';
 import firestore from '@react-native-firebase/firestore';
 const ref = firestore().collection('questions');
 
@@ -62,6 +67,10 @@ export const addQuestion = ({question}) => {
 export const fetchQuestionClient = () => {
   return (dispatch) => {
     ref.onSnapshot((querySnapshot) => {
+      // if (querySnapshot.size === 0) {
+      //   dispatch({type: HANDLE_EMPTY_QUESTION});
+      //   return;
+      // }
       const dataList = [];
       querySnapshot.forEach((doc) => {
         const {title} = doc.data();

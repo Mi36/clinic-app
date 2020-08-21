@@ -21,10 +21,9 @@ import {
 export default function HomeScreen({navigation}) {
   const question = useSelector((state) => state.questions.question);
   let lists = useSelector((state) => state.questions.list);
-  console.log(lists);
-  const [dummy, setDummy] = useState(false);
-
   const loading = useSelector((state) => state.questions.loading);
+  const QuestionError = useSelector((state) => state.questions);
+
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
@@ -55,6 +54,16 @@ export default function HomeScreen({navigation}) {
         Add Qustion
       </Button>
 
+      {QuestionError.add_que_error && (
+        <Text style={{color: 'red'}}>{QuestionError.add_que_error}</Text>
+      )}
+      {QuestionError.update_que_error && (
+        <Text style={{color: 'red'}}>{QuestionError.update_que_error}</Text>
+      )}
+      {QuestionError.delete_que_error && (
+        <Text style={{color: 'red'}}>{QuestionError.delete_que_error}</Text>
+      )}
+
       {loading && lists.length !== 0 ? (
         <ActivityIndicator size="large" color="greys" />
       ) : (
@@ -80,13 +89,6 @@ export default function HomeScreen({navigation}) {
                       navigation.navigate('Item', {
                         item: item,
                       });
-                    }}>
-                    <Text style={styles.textstyle}>Update</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                      setDummy(!dummy);
                     }}>
                     <Text style={styles.textstyle}>Update</Text>
                   </TouchableOpacity>

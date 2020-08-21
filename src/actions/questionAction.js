@@ -4,9 +4,11 @@ import {
   DELETE_QUESTION,
   QUESTION_CHANGED,
   QUESTION_FETCH_SUCCES,
-  ADD_QUESTION_ERROR,
   FETCH_CLIENTS,
   FETCH_CLIENT_ANSWERS,
+  HANDLE_ADD_QUE_ERROR,
+  HANDLE_DELETE_QUE_ERROR,
+  HANDLE_UPDATE_QUE_ERROR,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 const ref = firestore().collection('questions');
@@ -31,14 +33,12 @@ export const deleteQuestion = (id) => {
             dispatch({type: DELETE_QUESTION});
           }
         });
+      })
+      .catch((e) => {
+        console.log('deletin item failed');
+        dispatch({type: HANDLE_DELETE_QUE_ERROR, payload: 'deletion failed.'});
       });
   };
-};
-
-const updateItem = () => {
-  ref.doc(question.id).update({
-    title: value,
-  });
 };
 
 export const updateQuestion = (id, value) => {
@@ -51,6 +51,13 @@ export const updateQuestion = (id, value) => {
       .then(() => {
         dispatch({
           type: EDIT_QUESTION,
+        });
+      })
+      .catch((e) => {
+        console.log('Update question error', e);
+        dispatch({
+          type: HANDLE_UPDATE_QUE_ERROR,
+          payload: 'Updation not processed.',
         });
       });
   };
@@ -83,7 +90,7 @@ export const questionsFetch = () => {
     ref.onSnapshot((querySnapshot) => {
       const list = [];
       querySnapshot.forEach((doc) => {
-        const {title, complete} = doc.data();
+        const {title} = doc.data();
         list.push({
           id: doc.id,
           title,
@@ -105,7 +112,10 @@ export const addQuestion = ({question}) => {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({type: ADD_QUESTION_ERROR, payload: 'something wrong'});
+        dispatch({
+          type: HANDLE_ADD_QUE_ERROR,
+          payload: 'Question not added please try again.',
+        });
       });
   };
 };

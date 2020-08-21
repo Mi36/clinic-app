@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {View, SafeAreaView, FlatList} from 'react-native';
-import {Layout, Text, Button, Input} from '@ui-kitten/components';
+import {View, SafeAreaView, FlatList, StyleSheet} from 'react-native';
+import {Layout, Text, Button, Input, Icon} from '@ui-kitten/components';
 import List from '../components/List';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -66,8 +66,6 @@ export default function HomeScreen({navigation}) {
 
 HomeScreen.navigationOptions = (navData) => {
   return {
-    headerTitle: 'Questions',
-
     headerRight: () => (
       <Button
         onPress={() => {

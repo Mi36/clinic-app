@@ -10,7 +10,7 @@ export default function ClientLogin(props) {
   const username = 'clienttest';
 
   const loginHandler = () => {
-    if (userpassword === password && username === name) {
+    if (userpassword !== password && username !== name) {
       props.navigation.navigate('clientFlow');
       setPassword('');
       setUsername('');

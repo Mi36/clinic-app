@@ -1,7 +1,14 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
+import {
+  ApplicationProvider,
+  IconRegistry,
+  Layout,
+  Text,
+} from '@ui-kitten/components';
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import AsyncStorage from '@react-native-community/async-storage';
-import {ApplicationProvider} from '@ui-kitten/components';
+
 import AppNavigator from './src/navigation/AppNavigator';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
@@ -22,9 +29,12 @@ let persistor = persistStore(store);
 export default App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <AppNavigator />
-      </ApplicationProvider>
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <AppNavigator />
+        </ApplicationProvider>
+      </>
     </PersistGate>
   </Provider>
 );

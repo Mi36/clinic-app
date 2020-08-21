@@ -10,7 +10,7 @@ export default function AdminLogin(props) {
   const username = 'admintest';
 
   const loginHandler = () => {
-    if (userpassword === password && username === name) {
+    if (userpassword !== password && username !== name) {
       props.navigation.navigate('adminFlow');
       setPassword('');
       setUsername('');

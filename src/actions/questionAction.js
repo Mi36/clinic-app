@@ -26,7 +26,11 @@ export const deleteQuestion = (id) => {
       .delete()
       .then(() => {
         console.log('item deleted');
-        dispatch({type: DELETE_QUESTION});
+        ref.get().then((querySnapshot) => {
+          if (querySnapshot.size === 0) {
+            dispatch({type: DELETE_QUESTION});
+          }
+        });
       });
   };
 };
@@ -83,7 +87,6 @@ export const questionsFetch = () => {
         list.push({
           id: doc.id,
           title,
-          complete,
         });
         dispatch({type: QUESTION_FETCH_SUCCES, payload: list});
       });

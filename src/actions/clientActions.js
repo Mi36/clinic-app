@@ -2,7 +2,7 @@ import {FETCH_QUESTIONS_CLIENT, ADD_ANSWER, TOGGLE_SUCCESS} from './types';
 import firestore from '@react-native-firebase/firestore';
 const ref = firestore().collection('questions');
 
-const dummy = firestore().collection('clients').doc('illyas');
+const dummy = firestore().collection('clients').doc('Jhon');
 
 export const toggleSuccess = () => {
   return {
@@ -19,7 +19,7 @@ export const falseSuccess = (id) => {
 export const addAnswer = (id, title, answer) => {
   const clientRef = firestore()
     .collection('clients')
-    .doc('illyas')
+    .doc('Jhon')
     .collection('QAS')
     .doc(id);
   return (dispatch) => {

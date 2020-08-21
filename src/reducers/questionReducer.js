@@ -31,6 +31,7 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_QUESTION:
       return {
         ...state,
+        list: [],
       };
     case ADD_QUESTION:
       return {

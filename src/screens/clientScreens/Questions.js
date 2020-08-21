@@ -17,6 +17,7 @@ import {
 } from '../../actions/clientActions';
 
 export default function Questions(props) {
+  const [error, setError] = useState(null);
   const success = useSelector((state) => state.clientData.success);
   const itemid = useSelector((state) => state.clientData.itemid);
   const [answer, setAnswer] = useState('');
@@ -34,12 +35,17 @@ export default function Questions(props) {
             multiline
             textAlignVertical="top"
           />
+          {error && <Text style={{color: 'red'}}>{error}</Text>}
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
             {success === false && itemid === currentId ? (
               <ActivityIndicator size="large" color="greys" />
             ) : (
               <Button
                 onPress={() => {
+                  if (!answer.replace(/\s/g, '').length) {
+                    setError(`Answer can't be empty.`);
+                    return;
+                  }
                   dispatch(falseSuccess(props.questions.id));
                   dispatch(
                     addAnswer(
@@ -48,6 +54,7 @@ export default function Questions(props) {
                       answer,
                     ),
                   );
+                  setError(null);
                 }}>
                 Submit
               </Button>

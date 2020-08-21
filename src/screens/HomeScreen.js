@@ -37,7 +37,7 @@ export default function HomeScreen({navigation}) {
         <Button
           style={{marginVertical: 10}}
           onPress={() => {
-            if (question === '') {
+            if (!question.replace(/\s/g, '').length) {
               setError('Please enter your question here.');
               return;
             }

@@ -8,3 +8,6 @@ export const ADD_QUESTION_ERROR = 'add_question_error';
 export const FETCH_CLIENTS = 'FETCH_CLIENTS';
 export const FETCH_QUESTIONS_CLIENT = 'FETCH_QUESTIONS_CLIENT';
 export const FETCH_CLIENT_ANSWERS = 'FETCH_CLIENT_ANSWERS';
+export const ADD_ANSWER = 'ADD_ANSWER';
+export const ANSWER_CHANGED = 'ANSWER_CHANGED';
+export const TOGGLE_SUCCESS = 'TOGGLE_SUCCESS';

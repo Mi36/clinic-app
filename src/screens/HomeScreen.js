@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, SafeAreaView, FlatList} from 'react-native';
 import {Layout, Text, Button, Input} from '@ui-kitten/components';
 import List from '../components/List';
@@ -14,6 +14,7 @@ export default function HomeScreen({navigation}) {
   const question = useSelector((state) => state.questions.question);
   const lists = useSelector((state) => state.questions.list);
   const loading = useSelector((state) => state.questions.loading);
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,20 +23,26 @@ export default function HomeScreen({navigation}) {
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Layout style={{flex: 1, alignItems: 'center'}}>
+      <Layout style={{flex: 1}}>
         <Input
           label={'New Question'}
           value={question}
           onChangeText={(text) => dispatch(questionChange(text))}
+          multiline
+          textAlignVertical="top"
         />
-        <Button onPress={() => dispatch(addQuestion({question}))}>
-          Add Qustion
-        </Button>
+        {error && <Text style={{color: 'red'}}>{error}</Text>}
         <Button
+          style={{marginVertical: 10}}
           onPress={() => {
-            navigation.navigate('loginFlow');
+            if (question === '') {
+              setError('Please enter your question here.');
+              return;
+            }
+            dispatch(addQuestion({question}));
+            setError(null);
           }}>
-          LogOut
+          Add Qustion
         </Button>
 
         {loading ? (
@@ -44,7 +51,7 @@ export default function HomeScreen({navigation}) {
           </View>
         ) : (
           <FlatList
-            style={{flex: 1}}
+            style={{flex: 1, marginTop: 15}}
             data={lists}
             keyExtractor={(item) => item.id}
             renderItem={({item}) => (

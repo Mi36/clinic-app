@@ -4,5 +4,5 @@ import clientReducer from './clientReducer';
 
 export default combineReducers({
   questions: questionReducer,
-  clientQuestions: clientReducer,
+  clientData: clientReducer,
 });

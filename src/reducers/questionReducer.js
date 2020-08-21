@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   question: '',
   list: [],
   error: '',
-  loading: false,
+  loading: true,
   clients: [],
   answers: [],
 };
@@ -45,7 +45,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         list: action.payload,
         loading: false,
-        // error: '',
       };
     case ADD_QUESTION_ERROR:
       return {

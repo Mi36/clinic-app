@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, SafeAreaView, FlatList, StyleSheet} from 'react-native';
+import {View, SafeAreaView, FlatList, ActivityIndicator} from 'react-native';
 import {Layout, Text, Button, Input, Icon} from '@ui-kitten/components';
 import List from '../components/List';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,13 +13,15 @@ import {
 export default function HomeScreen({navigation}) {
   const question = useSelector((state) => state.questions.question);
   const lists = useSelector((state) => state.questions.list);
+
   const loading = useSelector((state) => state.questions.loading);
+  console.log(loading);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(questionsFetch());
     dispatch(fetchClients());
+    dispatch(questionsFetch());
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -46,9 +48,7 @@ export default function HomeScreen({navigation}) {
         </Button>
 
         {loading ? (
-          <View>
-            <Text>loading.....</Text>
-          </View>
+          <ActivityIndicator size="large" color="greys" />
         ) : (
           <FlatList
             style={{flex: 1, marginTop: 15}}

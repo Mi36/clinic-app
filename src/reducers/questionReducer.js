@@ -10,6 +10,7 @@ import {
   QUESTION_CHANGED,
   QUESTION_FETCH_SUCCES,
   TOGGLE_LOADING,
+  ADD_QUESTION_LOADING,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
   add_que_error: null,
   update_que_error: null,
   delete_que_error: null,
+  add_que_loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -52,6 +54,7 @@ export default (state = INITIAL_STATE, action) => {
         update_que_error: null,
         delete_que_error: null,
         add_que_error: null,
+        add_que_loading: false,
       };
     case QUESTION_CHANGED:
       return {...state, question: action.payload};
@@ -60,6 +63,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         list: action.payload,
         loading: false,
+        add_que_loading: false,
       };
     case HANDLE_ADD_QUE_ERROR:
       return {
@@ -90,6 +94,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case ADD_QUESTION_LOADING:
+      return {
+        ...state,
+        add_que_loading: true,
       };
     default:
       return state;

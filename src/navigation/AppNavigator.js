@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Button, Icon} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {toggleLoading} from '../actions/questionAction';
 import AdminLogin from '../screens/AdminLogin';
 import AnswersScreen from '../screens/AnswersScreen';
 import ClientLogin from '../screens/clientScreens/ClientLogin';
@@ -17,6 +19,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+  const dispatch = useDispatch();
   const createBottomTabs = () => {
     return (
       <Tab.Navigator>
@@ -58,6 +61,7 @@ const AppNavigator = () => {
             headerRight: () => (
               <Button
                 onPress={() => {
+                  dispatch(toggleLoading());
                   navigation.navigate('Admin Login');
                 }}>
                 Logout

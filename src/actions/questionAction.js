@@ -11,6 +11,8 @@ import {
   QUESTION_CHANGED,
   QUESTION_FETCH_SUCCES,
   TOGGLE_LOADING,
+  HANDLE_EMPTY_QUESTION,
+  ADD_QUESTION_LOADING,
 } from './types';
 const ref = firestore().collection('questions');
 const clientRef = firestore().collection('clients');
@@ -38,6 +40,7 @@ export const deleteQuestion = (id) => {
         ref.get().then((querySnapshot) => {
           if (querySnapshot.size === 0) {
             dispatch({type: DELETE_QUESTION});
+            dispatch({type: HANDLE_EMPTY_QUESTION});
           }
         });
       })
@@ -45,6 +48,12 @@ export const deleteQuestion = (id) => {
         console.log('deletin item failed');
         dispatch({type: HANDLE_DELETE_QUE_ERROR, payload: 'deletion failed.'});
       });
+  };
+};
+
+export const addQueLoading = () => {
+  return {
+    type: ADD_QUESTION_LOADING,
   };
 };
 
@@ -95,6 +104,10 @@ export const clientAnswerFetch = (name) => {
 export const questionsFetch = () => {
   return (dispatch) => {
     ref.onSnapshot((querySnapshot) => {
+      if (querySnapshot.size === 0) {
+        dispatch({type: DELETE_QUESTION});
+        dispatch({type: HANDLE_EMPTY_QUESTION});
+      }
       const list = [];
       querySnapshot.forEach((doc) => {
         const {title} = doc.data();

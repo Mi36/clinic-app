@@ -30,7 +30,7 @@ export const addAnswer = (id, title, answer) => {
   return (dispatch) => {
     dummy
       .set({
-        dummy: 'dummy',
+        Usename: 'John',
       })
       .then(() => {
         clientRef.set({

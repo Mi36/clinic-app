@@ -6,12 +6,11 @@ import {clientAnswerFetch} from '../actions/questionAction';
 export default function AnswersScreen({route}) {
   const dispatch = useDispatch();
   const id = route.params.itemId;
-  console.log(id);
   const answers = useSelector((state) => state.questions.answers);
-  console.log(answers);
   useEffect(() => {
     dispatch(clientAnswerFetch(id));
   }, [dispatch, id]);
+
   return (
     <FlatList
       style={styles.flex}

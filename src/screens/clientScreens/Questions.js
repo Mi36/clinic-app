@@ -19,9 +19,7 @@ import {
 export default function Questions(props) {
   const [error, setError] = useState(null);
   const [answer, setAnswer] = useState('');
-  const success = useSelector((state) => state.clientData.success);
-  const itemid = useSelector((state) => state.clientData.itemid);
-
+  const {success, itemid} = useSelector((state) => state.clientData);
   const currentId = props.questions.id;
   const dispatch = useDispatch();
   return (

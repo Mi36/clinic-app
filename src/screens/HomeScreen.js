@@ -15,14 +15,19 @@ import {
   fetchClients,
   questionChange,
   questionsFetch,
+  addQueLoading,
 } from '../actions/questionAction';
 
 export default function HomeScreen({navigation}) {
-  const question = useSelector((state) => state.questions.question);
-  let lists = useSelector((state) => state.questions.list);
-  const loading = useSelector((state) => state.questions.loading);
-  const QuestionError = useSelector((state) => state.questions);
-
+  const {
+    question,
+    list,
+    loading,
+    add_que_error,
+    update_que_error,
+    delete_que_error,
+    add_que_loading,
+  } = useSelector((state) => state.questions);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
@@ -41,35 +46,38 @@ export default function HomeScreen({navigation}) {
         textAlignVertical="top"
       />
       {error && <Text style={styles.errorText}>{error}</Text>}
-      <Button
-        style={styles.margin}
-        onPress={() => {
-          if (!question.replace(/\s/g, '').length) {
-            setError('Please enter your question here.');
-            return;
-          }
-          dispatch(addQuestion({question}));
-          setError(null);
-        }}>
-        Add Qustion
-      </Button>
-
-      {QuestionError.add_que_error && (
-        <Text style={styles.errorText}>{QuestionError.add_que_error}</Text>
-      )}
-      {QuestionError.update_que_error && (
-        <Text style={styles.errorText}>{QuestionError.update_que_error}</Text>
-      )}
-      {QuestionError.delete_que_error && (
-        <Text style={styles.errorText}>{QuestionError.delete_que_error}</Text>
+      {add_que_loading === true ? (
+        <ActivityIndicator size="small" color="greys" />
+      ) : (
+        <Button
+          style={styles.margin}
+          onPress={() => {
+            if (!question.replace(/\s/g, '').length) {
+              setError('Please enter your question here.');
+              return;
+            }
+            dispatch(addQueLoading());
+            dispatch(addQuestion({question}));
+            setError(null);
+          }}>
+          Add Qustion
+        </Button>
       )}
 
-      {loading && lists.length !== 0 ? (
+      {add_que_error && <Text style={styles.errorText}>{add_que_error}</Text>}
+      {update_que_error && (
+        <Text style={styles.errorText}>{update_que_error}</Text>
+      )}
+      {delete_que_error && (
+        <Text style={styles.errorText}>{delete_que_error}</Text>
+      )}
+
+      {loading && list.length !== 0 ? (
         <ActivityIndicator size="large" color="greys" />
       ) : (
         <FlatList
           style={styles.flatlistStyle}
-          data={lists}
+          data={list}
           keyExtractor={(item) => item.id}
           renderItem={({item}) => (
             <View style={styles.placeItem}>

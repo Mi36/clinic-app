@@ -6,7 +6,6 @@ import {
   TOGGLE_SUCCESS,
 } from './types';
 const ref = firestore().collection('questions');
-const dummy = firestore().collection('clients').doc('Jhon');
 
 export const toggleSuccess = () => {
   return {
@@ -22,6 +21,7 @@ export const falseSuccess = (id) => {
 };
 
 export const addAnswer = (id, title, answer) => {
+  const dummy = firestore().collection('clients').doc('Jhon');
   const clientRef = firestore()
     .collection('clients')
     .doc('Jhon')
@@ -30,7 +30,7 @@ export const addAnswer = (id, title, answer) => {
   return (dispatch) => {
     dummy
       .set({
-        Usename: 'John',
+        Usename: 'Jhon',
       })
       .then(() => {
         clientRef.set({

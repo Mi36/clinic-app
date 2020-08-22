@@ -13,6 +13,7 @@ import {
   TOGGLE_LOADING,
   HANDLE_EMPTY_QUESTION,
   ADD_QUESTION_LOADING,
+  FETCH_CLIENTS_EMPTY,
 } from './types';
 const ref = firestore().collection('questions');
 const clientRef = firestore().collection('clients');
@@ -143,6 +144,9 @@ export const addQuestion = ({question}) => {
 export const fetchClients = () => {
   return (dispatch) => {
     clientRef.onSnapshot((querySnapshot) => {
+      if (querySnapshot.size === 0) {
+        dispatch({type: FETCH_CLIENTS_EMPTY});
+      }
       const clients = [];
       querySnapshot.forEach((doc) => {
         clients.push({

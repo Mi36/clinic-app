@@ -3,18 +3,19 @@ import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {clientAnswerFetch} from '../actions/questionAction';
 
-export default function clientAnswersScreen({navigation}) {
+export default function AnswersScreen({navigation}) {
   const dispatch = useDispatch();
   const id = navigation.getParam('itemId', null);
   const answers = useSelector((state) => state.questions.answers);
+  console.log(answers);
   useEffect(() => {
     dispatch(clientAnswerFetch(id));
-  }, []);
+  }, [dispatch, id]);
   return (
     <FlatList
-      style={{flex: 1}}
+      style={styles.flex}
       data={answers}
-      keyExtractor={(item) => item.question}
+      keyExtractor={(item) => item.id}
       renderItem={({item}) => (
         <View style={styles.placeItem}>
           <View style={styles.infoContainer}>
@@ -28,6 +29,9 @@ export default function clientAnswersScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
   placeItem: {
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,

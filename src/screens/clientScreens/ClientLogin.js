@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Layout, Text, Button, Input} from '@ui-kitten/components';
+import {StyleSheet} from 'react-native';
 
 export default function ClientLogin(props) {
   const [name, setUsername] = useState('');
@@ -26,7 +27,7 @@ export default function ClientLogin(props) {
     }
   };
   return (
-    <Layout style={{paddingTop: 26}}>
+    <Layout style={styles.padding}>
       <Input
         autoCapitalize="none"
         label={'Username'}
@@ -49,3 +50,7 @@ export default function ClientLogin(props) {
     </Layout>
   );
 }
+
+const styles = StyleSheet.create({
+  padding: {paddingTop: 26},
+});

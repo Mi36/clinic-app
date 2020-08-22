@@ -9,7 +9,9 @@ import {
   HANDLE_UPDATE_QUE_ERROR,
   HANDLE_DELETE_QUE_ERROR,
   HANDLE_ADD_QUE_ERROR,
+  TOGGLE_LOADING,
 } from '../actions/types';
+
 const INITIAL_STATE = {
   question: '',
   list: [],
@@ -20,6 +22,7 @@ const INITIAL_STATE = {
   update_que_error: null,
   delete_que_error: null,
 };
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_CLIENT_ANSWERS:
@@ -27,7 +30,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         answers: action.payload,
       };
-
     case EDIT_QUESTION:
       return {
         ...state,
@@ -83,6 +85,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         clients: action.payload,
+      };
+    case TOGGLE_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

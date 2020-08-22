@@ -18,9 +18,10 @@ import {
 
 export default function Questions(props) {
   const [error, setError] = useState(null);
+  const [answer, setAnswer] = useState('');
   const success = useSelector((state) => state.clientData.success);
   const itemid = useSelector((state) => state.clientData.itemid);
-  const [answer, setAnswer] = useState('');
+
   const currentId = props.questions.id;
   const dispatch = useDispatch();
   return (
@@ -35,15 +36,15 @@ export default function Questions(props) {
             multiline
             textAlignVertical="top"
           />
-          {error && <Text style={{color: 'red'}}>{error}</Text>}
-          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+          {error && <Text style={styles.errorText}>{error}</Text>}
+          <View style={styles.buttonContainer}>
             {success === false && itemid === currentId ? (
               <ActivityIndicator size="large" color="greys" />
             ) : (
               <Button
                 onPress={() => {
                   if (!answer.replace(/\s/g, '').length) {
-                    setError(`Answer can't be empty.`);
+                    setError("Answer can't be empty.");
                     return;
                   }
                   dispatch(falseSuccess(props.questions.id));
@@ -76,7 +77,7 @@ export default function Questions(props) {
               </Text>
 
               <TouchableHighlight
-                style={{...styles.openButton, backgroundColor: '#2196F3'}}
+                style={styles.openButton}
                 onPress={() => {
                   dispatch(toggleSuccess());
                 }}>
@@ -91,6 +92,11 @@ export default function Questions(props) {
 }
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  errorText: {color: 'red'},
   placeItem: {
     borderColor: '#ccc',
     borderTopColor: '#ccc',
@@ -144,7 +150,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#2196F3',
     borderRadius: 20,
     padding: 10,
     elevation: 2,

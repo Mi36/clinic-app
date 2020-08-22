@@ -9,6 +9,7 @@ import {
   HANDLE_ADD_QUE_ERROR,
   HANDLE_DELETE_QUE_ERROR,
   HANDLE_UPDATE_QUE_ERROR,
+  TOGGLE_LOADING,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 const ref = firestore().collection('questions');
@@ -18,6 +19,12 @@ export const questionChange = (text) => {
   return {
     type: QUESTION_CHANGED,
     payload: text,
+  };
+};
+
+export const toggleLoading = () => {
+  return {
+    type: TOGGLE_LOADING,
   };
 };
 
@@ -64,7 +71,6 @@ export const updateQuestion = (id, value) => {
 };
 
 export const clientAnswerFetch = (name) => {
-  const dummy = firestore().collection('clients').doc(name);
   const clientAnswers = firestore()
     .collection('clients')
     .doc(name)
@@ -74,10 +80,11 @@ export const clientAnswerFetch = (name) => {
     clientAnswers.onSnapshot((querySnapshot) => {
       const answers = [];
       querySnapshot.forEach((doc) => {
-        const {answer, question} = doc.data();
+        const {answer, question, id} = doc.data();
         answers.push({
           question,
           answer,
+          id,
         });
         dispatch({type: FETCH_CLIENT_ANSWERS, payload: answers});
       });

@@ -2,11 +2,10 @@ import {
   FETCH_QUESTIONS_CLIENT,
   ADD_ANSWER,
   TOGGLE_SUCCESS,
-  HANDLE_EMPTY_QUESTION,
+  FALSE_SUCCESS,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 const ref = firestore().collection('questions');
-
 const dummy = firestore().collection('clients').doc('Jhon');
 
 export const toggleSuccess = () => {
@@ -14,9 +13,10 @@ export const toggleSuccess = () => {
     type: TOGGLE_SUCCESS,
   };
 };
+
 export const falseSuccess = (id) => {
   return {
-    type: 'FALSE_SUCCESS',
+    type: FALSE_SUCCESS,
     payload: id,
   };
 };
@@ -36,6 +36,7 @@ export const addAnswer = (id, title, answer) => {
         clientRef.set({
           question: title,
           answer: answer,
+          id: id,
         });
       })
       .then(() => {
@@ -47,30 +48,9 @@ export const addAnswer = (id, title, answer) => {
   };
 };
 
-export const addQuestion = ({question}) => {
-  return (dispatch) => {
-    firestore()
-      .collection('questions')
-      .add({
-        title: question,
-      })
-      .then(() => {
-        dispatch({type: ADD_QUESTION});
-      })
-      .catch((e) => {
-        console.log(e);
-        dispatch({type: ADD_QUESTION_ERROR, payload: 'something wrong'});
-      });
-  };
-};
-
 export const fetchQuestionClient = () => {
   return (dispatch) => {
     ref.onSnapshot((querySnapshot) => {
-      // if (querySnapshot.size === 0) {
-      //   dispatch({type: HANDLE_EMPTY_QUESTION});
-      //   return;
-      // }
       const dataList = [];
       querySnapshot.forEach((doc) => {
         const {title} = doc.data();

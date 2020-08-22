@@ -4,17 +4,17 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import React from 'react';
 import {Icon} from '@ui-kitten/components';
 import HomeScreen from '../screens/HomeScreen';
-import Item from '../screens/Item';
+import QuestionEditScreen from '../screens/QuestionEditScreen';
 import ClientScreen from '../screens/clientScreens/ClientScreen';
-import ClientListScreen from '../screens/ClientListScreen';
-import Initial from '../screens/Initial';
-import clientAnswersScreen from '../screens/clientAnswersScreen';
+import ListScreen from '../screens/ListScreen';
+import InitialScreen from '../screens/InitialScreen';
+import AnswersScreen from '../screens/AnswersScreen';
 import AdminLogin from '../screens/AdminLogin';
-import ClientLogin from '../screens/ClientLogin';
+import ClientLogin from '../screens/clientScreens/ClientLogin';
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
-    Initial: Initial,
+    Initial: InitialScreen,
     Admin: AdminLogin,
     ClientLogin: ClientLogin,
   }),
@@ -25,7 +25,7 @@ const switchNavigator = createSwitchNavigator({
     Qustions: {
       screen: createStackNavigator({
         Home: HomeScreen,
-        Item: Item,
+        Update: QuestionEditScreen,
       }),
       navigationOptions: {
         tabBarLabel: 'Home',
@@ -36,8 +36,8 @@ const switchNavigator = createSwitchNavigator({
     },
     Clients: {
       screen: createStackNavigator({
-        ClientList: ClientListScreen,
-        ClientAnswers: clientAnswersScreen,
+        ClientList: ListScreen,
+        ClientAnswers: AnswersScreen,
       }),
       navigationOptions: {
         tabBarLabel: 'Clients',

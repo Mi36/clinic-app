@@ -7,8 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {Layout, Text, Button, Input} from '@ui-kitten/components';
-
+import {Text, Button, Input} from '@ui-kitten/components';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   questionChange,
@@ -30,9 +29,10 @@ export default function HomeScreen({navigation}) {
   useEffect(() => {
     dispatch(fetchClients());
     dispatch(questionsFetch());
-  }, []);
+  }, [dispatch]);
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.flex}>
       <Input
         label={'New Question'}
         value={question}
@@ -40,9 +40,9 @@ export default function HomeScreen({navigation}) {
         multiline
         textAlignVertical="top"
       />
-      {error && <Text style={{color: 'red'}}>{error}</Text>}
+      {error && <Text style={styles.errorText}>{error}</Text>}
       <Button
-        style={{marginVertical: 10}}
+        style={styles.margin}
         onPress={() => {
           if (!question.replace(/\s/g, '').length) {
             setError('Please enter your question here.');
@@ -55,27 +55,27 @@ export default function HomeScreen({navigation}) {
       </Button>
 
       {QuestionError.add_que_error && (
-        <Text style={{color: 'red'}}>{QuestionError.add_que_error}</Text>
+        <Text style={styles.errorText}>{QuestionError.add_que_error}</Text>
       )}
       {QuestionError.update_que_error && (
-        <Text style={{color: 'red'}}>{QuestionError.update_que_error}</Text>
+        <Text style={styles.errorText}>{QuestionError.update_que_error}</Text>
       )}
       {QuestionError.delete_que_error && (
-        <Text style={{color: 'red'}}>{QuestionError.delete_que_error}</Text>
+        <Text style={styles.errorText}>{QuestionError.delete_que_error}</Text>
       )}
 
       {loading && lists.length !== 0 ? (
         <ActivityIndicator size="large" color="greys" />
       ) : (
         <FlatList
-          style={{flex: 1, marginTop: 15}}
+          style={styles.flatlistStyle}
           data={lists}
           keyExtractor={(item) => item.id}
           renderItem={({item}) => (
             <View style={styles.placeItem}>
               <View style={styles.infoContainer}>
                 <Text style={styles.title}>{item.title}</Text>
-                <View style={{flexDirection: 'row'}}>
+                <View style={styles.buttonContainer}>
                   <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
@@ -86,7 +86,7 @@ export default function HomeScreen({navigation}) {
                   <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                      navigation.navigate('Item', {
+                      navigation.navigate('Update', {
                         item: item,
                       });
                     }}>
@@ -103,9 +103,15 @@ export default function HomeScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  margin: {marginVertical: 10},
+  flex: {flex: 1},
+  errorText: {
+    color: 'red',
+  },
   textstyle: {
     color: 'white',
   },
+  buttonContainer: {flexDirection: 'row'},
   button: {
     backgroundColor: '#3d80e2',
     marginRight: 10,
@@ -114,7 +120,6 @@ const styles = StyleSheet.create({
   },
   placeItem: {
     borderColor: '#ccc',
-
     borderWidth: 1,
     paddingVertical: 15,
     flexDirection: 'row',
@@ -142,6 +147,7 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 16,
   },
+  flatlistStyle: {flex: 1, marginTop: 15},
 });
 
 HomeScreen.navigationOptions = (navData) => {

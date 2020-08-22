@@ -3,6 +3,7 @@ import {
   ADD_ANSWER,
   TOGGLE_SUCCESS,
   HANDLE_EMPTY_QUESTION,
+  FALSE_SUCCESS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         questions: [],
       };
-    case 'FALSE_SUCCESS': {
+    case FALSE_SUCCESS: {
       return {
         ...state,
         success: false,

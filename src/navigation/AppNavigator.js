@@ -58,11 +58,12 @@ const AppNavigator = () => {
           children={createBottomTabs}
           options={({navigation}) => ({
             title: 'Questions',
+            headerLeft: null,
             headerRight: () => (
               <Button
                 onPress={() => {
                   dispatch(toggleLoading());
-                  navigation.navigate('Admin Login');
+                  navigation.navigate('Initial');
                 }}>
                 Logout
               </Button>
@@ -74,10 +75,11 @@ const AppNavigator = () => {
           component={ClientScreen}
           options={({navigation}) => ({
             title: 'Submit Your Answer',
+            headerLeft: null,
             headerRight: () => (
               <Button
                 onPress={() => {
-                  navigation.navigate('Client Login');
+                  navigation.navigate('Initial');
                 }}>
                 Logout
               </Button>

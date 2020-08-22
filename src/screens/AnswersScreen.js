@@ -3,9 +3,10 @@ import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {clientAnswerFetch} from '../actions/questionAction';
 
-export default function AnswersScreen({navigation}) {
+export default function AnswersScreen({route}) {
   const dispatch = useDispatch();
-  const id = navigation.getParam('itemId', null);
+  const id = route.params.itemId;
+  console.log(id);
   const answers = useSelector((state) => state.questions.answers);
   console.log(answers);
   useEffect(() => {

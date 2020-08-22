@@ -3,7 +3,6 @@ import {FlatList, SafeAreaView, Platform, StyleSheet} from 'react-native';
 import Questions from './Questions';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchQuestionClient} from '../../actions/clientActions';
-import {Button} from '@ui-kitten/components';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 export default function ClientScreen() {
@@ -27,19 +26,6 @@ export default function ClientScreen() {
     </SafeAreaView>
   );
 }
-ClientScreen.navigationOptions = (navData) => {
-  return {
-    headerTitle: 'Submit Your Answer',
-    headerRight: () => (
-      <Button
-        onPress={() => {
-          navData.navigation.navigate('loginFlow');
-        }}>
-        Logout
-      </Button>
-    ),
-  };
-};
 
 const styles = StyleSheet.create({
   flex: {

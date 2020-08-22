@@ -4,9 +4,9 @@ import {useDispatch} from 'react-redux';
 import {updateQuestion} from '../actions/questionAction';
 import {Button, Input} from '@ui-kitten/components';
 
-export default function QuestionEditScreen(props) {
+export default function QuestionUpdateScreen({route, navigation}) {
   const dispatch = useDispatch();
-  const question = props.navigation.getParam('item', null);
+  const question = route.params.item;
   const [value, setValue] = useState(question.title);
 
   return (
@@ -15,7 +15,7 @@ export default function QuestionEditScreen(props) {
       <Button
         onPress={() => {
           dispatch(updateQuestion(question.id, value));
-          props.navigation.goBack();
+          navigation.goBack();
         }}>
         Save
       </Button>

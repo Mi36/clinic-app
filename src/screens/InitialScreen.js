@@ -8,14 +8,14 @@ export default function InitialScreen(props) {
       <Button
         style={{}}
         onPress={() => {
-          props.navigation.navigate('Admin');
+          props.navigation.navigate('Admin Login');
         }}>
         Admin
       </Button>
       <Button
         style={styles.button}
         onPress={() => {
-          props.navigation.navigate('ClientLogin');
+          props.navigation.navigate('Client Login');
         }}>
         clientSection
       </Button>

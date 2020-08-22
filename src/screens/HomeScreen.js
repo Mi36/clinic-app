@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  addQueLoading,
   addQuestion,
   deleteQuestion,
   fetchClients,
   questionChange,
   questionsFetch,
-  addQueLoading,
 } from '../actions/questionAction';
 
 export default function HomeScreen({navigation}) {

@@ -24,7 +24,7 @@ const AppNavigator = () => {
     return (
       <Tab.Navigator>
         <Tab.Screen
-          name="Qustions"
+          name="Admin"
           component={HomeScreen}
           options={{
             tabBarLabel: 'Questions',
@@ -57,7 +57,7 @@ const AppNavigator = () => {
           name="AdminScreen"
           children={createBottomTabs}
           options={({navigation}) => ({
-            title: 'Questions',
+            title: 'Admin',
             headerLeft: null,
             headerRight: () => (
               <Button

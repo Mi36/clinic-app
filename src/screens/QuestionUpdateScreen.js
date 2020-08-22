@@ -1,8 +1,8 @@
+import {Button, Input} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {updateQuestion} from '../actions/questionAction';
-import {Button, Input} from '@ui-kitten/components';
 
 export default function QuestionUpdateScreen({route, navigation}) {
   const dispatch = useDispatch();

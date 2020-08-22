@@ -1,9 +1,9 @@
+import {Text} from '@ui-kitten/components';
 import React, {useEffect} from 'react';
-import {FlatList, View, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchClients} from '../actions/questionAction';
 import ItemScreen from '../screens/ItemScreen';
-import {Text} from '@ui-kitten/components';
 
 export default function ListScreen(props) {
   const data = useSelector((state) => state.questions);

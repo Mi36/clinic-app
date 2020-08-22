@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {FlatList, SafeAreaView, Platform, StyleSheet} from 'react-native';
-import Questions from './Questions';
+import {FlatList, Platform, SafeAreaView, StyleSheet} from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchQuestionClient} from '../../actions/clientActions';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import Questions from './Questions';
 
 export default function ClientScreen() {
   const dispatch = useDispatch();

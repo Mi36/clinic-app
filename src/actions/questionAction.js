@@ -1,17 +1,17 @@
+import firestore from '@react-native-firebase/firestore';
 import {
   ADD_QUESTION,
-  EDIT_QUESTION,
   DELETE_QUESTION,
-  QUESTION_CHANGED,
-  QUESTION_FETCH_SUCCES,
+  EDIT_QUESTION,
   FETCH_CLIENTS,
   FETCH_CLIENT_ANSWERS,
   HANDLE_ADD_QUE_ERROR,
   HANDLE_DELETE_QUE_ERROR,
   HANDLE_UPDATE_QUE_ERROR,
+  QUESTION_CHANGED,
+  QUESTION_FETCH_SUCCES,
   TOGGLE_LOADING,
 } from './types';
-import firestore from '@react-native-firebase/firestore';
 const ref = firestore().collection('questions');
 const clientRef = firestore().collection('clients');
 

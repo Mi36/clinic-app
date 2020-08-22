@@ -1,10 +1,10 @@
-import {
-  FETCH_QUESTIONS_CLIENT,
-  ADD_ANSWER,
-  TOGGLE_SUCCESS,
-  FALSE_SUCCESS,
-} from './types';
 import firestore from '@react-native-firebase/firestore';
+import {
+  ADD_ANSWER,
+  FALSE_SUCCESS,
+  FETCH_QUESTIONS_CLIENT,
+  TOGGLE_SUCCESS,
+} from './types';
 const ref = firestore().collection('questions');
 const dummy = firestore().collection('clients').doc('Jhon');
 

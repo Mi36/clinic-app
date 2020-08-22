@@ -1,19 +1,19 @@
+import {Button, Input} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  ActivityIndicator,
   Alert,
   Modal,
+  StyleSheet,
+  Text,
   TouchableHighlight,
-  ActivityIndicator,
+  View,
 } from 'react-native';
-import {Button, Input} from '@ui-kitten/components';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   addAnswer,
-  toggleSuccess,
   falseSuccess,
+  toggleSuccess,
 } from '../../actions/clientActions';
 
 export default function Questions(props) {

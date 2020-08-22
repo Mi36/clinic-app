@@ -1,5 +1,5 @@
+import {Button, Input, Layout, Text} from '@ui-kitten/components';
 import React, {useState} from 'react';
-import {Layout, Text, Button, Input} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 
 export default function AdminLogin(props) {

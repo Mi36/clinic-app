@@ -1,20 +1,20 @@
+import {Button, Input, Text} from '@ui-kitten/components';
 import React, {useEffect, useState} from 'react';
 import {
-  View,
-  SafeAreaView,
-  FlatList,
   ActivityIndicator,
+  FlatList,
+  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {Text, Button, Input} from '@ui-kitten/components';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  addQuestion,
+  deleteQuestion,
+  fetchClients,
   questionChange,
   questionsFetch,
-  addQuestion,
-  fetchClients,
-  deleteQuestion,
 } from '../actions/questionAction';
 
 export default function HomeScreen({navigation}) {

@@ -14,6 +14,7 @@ import {
   QUESTION_CHANGED,
   QUESTION_FETCH_SUCCES,
   TOGGLE_LOADING,
+  HANDLE_FETCH_ANSWERS_EMPTY,
 } from './types';
 const ref = firestore().collection('questions');
 const clientRef = firestore().collection('clients');
@@ -88,6 +89,9 @@ export const clientAnswerFetch = (name) => {
 
   return (dispatch) => {
     clientAnswers.onSnapshot((querySnapshot) => {
+      if (querySnapshot.size === 0) {
+        dispatch({type: HANDLE_FETCH_ANSWERS_EMPTY});
+      }
       const answers = [];
       querySnapshot.forEach((doc) => {
         const {answer, question, id} = doc.data();

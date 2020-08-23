@@ -17,7 +17,7 @@ export default function InitialScreen(props) {
         onPress={() => {
           props.navigation.navigate('Client Login');
         }}>
-        clientSection
+        Client Section
       </Button>
     </View>
   );

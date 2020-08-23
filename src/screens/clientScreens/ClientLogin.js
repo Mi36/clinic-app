@@ -11,7 +11,7 @@ export default function ClientLogin(props) {
   const username = 'clienttest';
 
   const loginHandler = () => {
-    if (userpassword !== password && username !== name) {
+    if (userpassword === password && username === name) {
       props.navigation.navigate('ClientScreen');
       setPassword('');
       setUsername('');
@@ -28,29 +28,31 @@ export default function ClientLogin(props) {
   };
   return (
     <Layout style={styles.padding}>
+      <Text style={styles.label}>Username</Text>
       <Input
         autoCapitalize="none"
-        label={'Username'}
         value={name}
         onChangeText={(text) => {
           setUsername(text);
         }}
       />
-      {nameError && <Text>{nameError}</Text>}
+      {nameError && <Text style={styles.errorText}>{nameError}</Text>}
+      <Text style={styles.label}>Password</Text>
       <Input
         autoCapitalize="none"
-        label={'Password'}
         value={password}
         onChangeText={(text) => {
           setPassword(text);
         }}
       />
-      {passwordError && <Text>{passwordError}</Text>}
+      {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
       <Button onPress={loginHandler}>Login</Button>
     </Layout>
   );
 }
 
 const styles = StyleSheet.create({
-  padding: {paddingTop: 26},
+  padding: {paddingTop: 15},
+  label: {marginLeft: 15, marginBottom: 5},
+  errorText: {color: 'red', marginLeft: 15, marginBottom: 3},
 });

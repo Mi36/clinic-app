@@ -50,7 +50,11 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Initial" component={InitialScreen} />
+        <Stack.Screen
+          name="Initial"
+          component={InitialScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen name="Admin Login" component={AdminLogin} />
         <Stack.Screen name="Client Login" component={ClientLogin} />
         <Stack.Screen
@@ -87,7 +91,13 @@ const AppNavigator = () => {
           })}
         />
         <Stack.Screen name="Update" component={QuestionUpdateScreen} />
-        <Stack.Screen name="ClientAnswers" component={AnswersScreen} />
+        <Stack.Screen
+          name="ClientAnswers"
+          component={AnswersScreen}
+          options={() => ({
+            title: 'Client Answers',
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -11,7 +11,7 @@ export default function AdminLogin(props) {
   const username = 'admintest';
 
   const loginHandler = () => {
-    if (userpassword !== password && username !== name) {
+    if (userpassword === password && username === name) {
       props.navigation.navigate('AdminScreen');
       setPassword('');
       setUsername('');
@@ -28,24 +28,24 @@ export default function AdminLogin(props) {
   };
   return (
     <Layout style={styles.container}>
+      <Text style={styles.label}>Username</Text>
       <Input
         autoCapitalize="none"
-        label={'Username'}
         value={name}
         onChangeText={(text) => {
           setUsername(text);
         }}
       />
-      {nameError && <Text>{nameError}</Text>}
+      {nameError && <Text style={styles.errorText}>{nameError}</Text>}
+      <Text style={styles.label}>Password</Text>
       <Input
         autoCapitalize="none"
-        label={'Password'}
         value={password}
         onChangeText={(text) => {
           setPassword(text);
         }}
       />
-      {passwordError && <Text>{passwordError}</Text>}
+      {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
       <Button onPress={loginHandler}>Login</Button>
     </Layout>
   );
@@ -53,6 +53,8 @@ export default function AdminLogin(props) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 26,
+    paddingTop: 15,
   },
+  label: {marginLeft: 15, marginBottom: 5},
+  errorText: {color: 'red', marginLeft: 15, marginBottom: 3},
 });

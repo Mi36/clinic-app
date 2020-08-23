@@ -21,16 +21,16 @@ export const falseSuccess = (id) => {
 };
 
 export const addAnswer = (id, title, answer) => {
-  const dummy = firestore().collection('clients').doc('James');
+  const dummy = firestore().collection('clients').doc('Jack');
   const clientRef = firestore()
     .collection('clients')
-    .doc('James')
+    .doc('Jack')
     .collection('QAS')
     .doc(id);
   return (dispatch) => {
     dummy
       .set({
-        Usename: 'James',
+        Usename: 'Jack',
       })
       .then(() => {
         clientRef.set({

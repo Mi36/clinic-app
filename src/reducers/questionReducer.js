@@ -12,6 +12,7 @@ import {
   QUESTION_CHANGED,
   QUESTION_FETCH_SUCCES,
   TOGGLE_LOADING,
+  HANDLE_FETCH_ANSWERS_EMPTY,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -105,6 +106,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         clients: [],
+      };
+    case HANDLE_FETCH_ANSWERS_EMPTY:
+      return {
+        ...state,
+        answers: [],
       };
     default:
       return state;

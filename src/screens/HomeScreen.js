@@ -38,8 +38,8 @@ export default function HomeScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.flex}>
+      <Text style={styles.label}>New Question</Text>
       <Input
-        label={'New Question'}
         value={question}
         onChangeText={(text) => dispatch(questionChange(text))}
         multiline
@@ -111,10 +111,12 @@ export default function HomeScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  label: {marginLeft: 13, marginVertical: 5},
   margin: {marginVertical: 10},
   flex: {flex: 1},
   errorText: {
     color: 'red',
+    marginLeft: 10,
   },
   textstyle: {
     color: 'white',
@@ -157,16 +159,3 @@ const styles = StyleSheet.create({
   },
   flatlistStyle: {flex: 1, marginTop: 15},
 });
-
-HomeScreen.navigationOptions = (navData) => {
-  return {
-    headerRight: () => (
-      <Button
-        onPress={() => {
-          navData.navigation.navigate('loginFlow');
-        }}>
-        Logout
-      </Button>
-    ),
-  };
-};
